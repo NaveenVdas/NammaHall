@@ -71,8 +71,9 @@ public class BookingConfiguration : IEntityTypeConfiguration<Booking>
         
         // Unique constraint: (HallId, EventDate) cannot have >1 active booking
         // Active bookings are those with Status = Pending or Confirmed
+        // Note: Filter syntax is provider-specific. For PostgreSQL, use double quotes or no quotes.
         builder.HasIndex(b => new { b.HallId, b.EventDate })
-            .HasFilter("[Status] IN (0, 1)") // Pending = 0, Confirmed = 1
+            .HasFilter("\"Status\" IN (0, 1)") // Pending = 0, Confirmed = 1 (PostgreSQL syntax)
             .IsUnique();
     }
 }
