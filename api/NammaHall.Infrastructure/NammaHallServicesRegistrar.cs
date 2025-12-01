@@ -24,7 +24,7 @@ public static class NammaHallServicesRegistrar
 
     private static IServiceCollection RegisterInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        // Railway provides DATABASE_URL environment variable for PostgreSQL
+        // Render provides DATABASE_URL environment variable for PostgreSQL
         var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
         var databaseProvider = configuration["DatabaseProvider"] ?? 
                               (databaseUrl != null ? "PostgreSQL" : "SqlServer");
@@ -88,7 +88,7 @@ public static class NammaHallServicesRegistrar
             .AddScoped<IBookingRepository, BookingRepository>();
 
     /// <summary>
-    /// Parses Railway's DATABASE_URL format (postgresql://user:password@host:port/database)
+    /// Parses Render's DATABASE_URL format (postgresql://user:password@host:port/database)
     /// into Npgsql connection string format (Host=host;Port=port;Database=database;Username=user;Password=password)
     /// </summary>
     private static string? ParseDatabaseUrl(string? databaseUrl)
@@ -96,7 +96,7 @@ public static class NammaHallServicesRegistrar
         if (string.IsNullOrEmpty(databaseUrl))
             return null;
 
-        // Railway format: postgresql://user:password@host:port/database
+        // Render format: postgresql://user:password@host:port/database
         if (databaseUrl.StartsWith("postgresql://", StringComparison.OrdinalIgnoreCase) ||
             databaseUrl.StartsWith("postgres://", StringComparison.OrdinalIgnoreCase))
         {

@@ -26,6 +26,8 @@ RUN dotnet publish "NammaHall.Api.csproj" -c Release -o /app/publish /p:UseAppHo
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
 EXPOSE 8080
+# Render provides PORT environment variable at runtime
+# ASP.NET Core will automatically use PORT if set, otherwise defaults to 8080
 ENV ASPNETCORE_URLS=http://+:8080
 ENV ASPNETCORE_ENVIRONMENT=Production
 
@@ -33,5 +35,6 @@ ENV ASPNETCORE_ENVIRONMENT=Production
 COPY --from=publish /app/publish .
 
 # Run migrations and start the app
+# Note: Render sets PORT automatically, ASP.NET Core will use it
 ENTRYPOINT ["dotnet", "NammaHall.Api.dll"]
 
