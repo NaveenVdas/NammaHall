@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using NammaHall.Domain.DomainModel;
 using NammaHall.Domain.DomainModel.HallAggregate;
 using NammaHall.Infrastructure.EntityConfigurations;
@@ -23,6 +24,16 @@ public class NammaHallDbContext : DbContext
         
         // Apply entity configurations
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(NammaHallDbContext).Assembly);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
+        
+        // Suppress pending model changes warning during migrations
+        // This is safe when applying migrations to a fresh database
+        optionsBuilder.ConfigureWarnings(warnings =>
+            warnings.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning));
     }
 }
 
