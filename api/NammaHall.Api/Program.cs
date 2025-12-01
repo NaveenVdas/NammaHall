@@ -43,7 +43,12 @@ if (!app.Environment.IsProduction())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseHttpsRedirection();
+// Disable HTTPS redirection on Render (Render handles HTTPS at load balancer)
+// Only use HTTPS redirection in development
+if (!app.Environment.IsProduction())
+{
+    app.UseHttpsRedirection();
+}
 app.UseCors();
 app.UseAuthorization();
 
