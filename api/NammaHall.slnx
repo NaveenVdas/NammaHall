@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="NammaHall.Api/NammaHall.Api.csproj" />
+  <Project Path="NammaHall.Application/NammaHall.Application.csproj" />
+  <Project Path="NammaHall.Domain/NammaHall.Domain.csproj" />
+  <Project Path="NammaHall.Infrastructure/NammaHall.Infrastructure.csproj" />
+</Solution>
+
