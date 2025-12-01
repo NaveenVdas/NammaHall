@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { adminApi, Hall } from "../services/api";
+import { adminApi } from "../services/api";
 
 const AdminHallFormPage: React.FC = () => {
   const navigate = useNavigate();

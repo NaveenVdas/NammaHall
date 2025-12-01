@@ -18,6 +18,8 @@ export interface Hall {
   ownerName: string;
   ownerPhone: string;
   googleMapsUrl?: string;
+  isPublished: boolean;
+  isVerified: boolean;
   images: string[];
 }
 
